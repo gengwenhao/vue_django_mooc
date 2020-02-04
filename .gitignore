@@ -1,4 +1,6 @@
 .idea/
+venv/
+
 # Logs
 logs
 *.log
