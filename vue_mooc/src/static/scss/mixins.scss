@@ -1,0 +1,14 @@
+@import "constant";
+
+@mixin container {
+  margin: 0 auto;
+  width: $containerWidth;
+  height: 100%;
+}
+
+@mixin flexContainer {
+  @include container;
+  display: flex;
+}
+
+
