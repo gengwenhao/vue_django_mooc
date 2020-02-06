@@ -1,9 +1,5 @@
 <template>
   <div id="category-menu">
-    <div class="title">
-      <i class="iconfont icon-courseware"></i>
-      <h3>全部课程</h3>
-    </div>
     <div class="item-list">
       <div class="item" v-for="(category,index) in menuCategoryList" :key="index">
         <span class="main-title">{{category.categoryName}}</span>
@@ -32,6 +28,10 @@
   @import "../../static/scss/constant";
 
   #category-menu {
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
     float: left;
     color: $menuFontColor;
     z-index: 2;
@@ -39,64 +39,45 @@
     width: 250px;
     height: 425px;
     background: $menuBGColor;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
 
-    .title {
-      height: 52px;
+    .item-list {
+      height: 100%;
       display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      box-sizing: border-box;
-      padding: 12px;
-      border-bottom: 1px solid whitesmoke;
-      width: 100%;
+      flex-direction: column;
+      justify-content: space-around;
 
-      h3 {
-
-        font-size: 18px;
+      .item {
+        height: 30px;
+        padding: 12px;
+        display: flex;
+        flex-direction: row;
+        flex-flow: nowrap;
+        justify-content: flex-start;
+        align-items: center;
         font-family: "Microsoft YaHei UI", "Arial", "Hiragino Sans GB", 宋体, "Georgia", "serif";
-      }
-
-      i {
-        margin-right: 8px;
-        font-size: 12px;
-      }
-    }
-
-    .item {
-      height: 50px;
-      padding: 12px;
-      display: flex;
-      flex-direction: row;
-      flex-flow: nowrap;
-      border-bottom: 1px solid whitesmoke;
-      justify-content: flex-start;
-      align-items: center;
-      font-family: "Microsoft YaHei UI", "Arial", "Hiragino Sans GB", 宋体, "Georgia", "serif";
-
-      &:hover {
-        background: #e0e0a4;
-      }
-
-      .main-title, .sub-title {
-        cursor: pointer;
-      }
-
-      .main-title {
-        font-size: 23px;
-        margin-right: 9px;
-        font-weight: bold;
-      }
-
-      .sub-title {
-        font-size: 13px;
-        margin-right: 8px;
 
         &:hover {
-          text-decoration: underline;
-          transition: 1s;
+          background: #e0e0a4;
+        }
+
+        .main-title, .sub-title {
+          cursor: pointer;
+        }
+
+        .main-title {
+          font-size: 23px;
+          margin-right: 9px;
+          font-weight: bold;
+        }
+
+        .sub-title {
+          font-size: 13px;
+          margin-right: 8px;
+
+          &:hover {
+            text-decoration: underline;
+            transition: 1s;
+          }
         }
       }
     }

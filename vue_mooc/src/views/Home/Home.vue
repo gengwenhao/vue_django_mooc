@@ -1,6 +1,7 @@
 <template>
   <div id="home">
     <main-nav></main-nav>
+    <toolbar></toolbar>
     <div class="banner-container">
       <div class="inner-container">
         <category-menu></category-menu>
@@ -18,10 +19,11 @@
   import CategoryMenu from './CategoryMenu'
   import CoursePanel from './CoursePanel'
   import MainFooter from '../../components/MainFooter/MainFooter'
+  import Toolbar from '../../components/Toolbar/Toolbar'
 
   export default {
     name: "Home",
-    components: {MainFooter, CoursePanel, CategoryMenu, Banner, MainNav}
+    components: {Toolbar, MainFooter, CoursePanel, CategoryMenu, Banner, MainNav}
   }
 </script>
 
@@ -33,9 +35,12 @@
     width: 100%;
 
     .banner-container {
+      margin-top: 130px;
       width: 100%;
       height: 425px;
       background: #000;
+      box-shadow: 0 0 0 1px hsla(0, 0%, 100%, .3) inset,
+      0 .1em .4em rgba(0, 0, 0, 0.6);
 
       .inner-container {
         @include container;

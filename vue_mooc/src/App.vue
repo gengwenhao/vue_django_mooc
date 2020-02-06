@@ -4,6 +4,7 @@
   </div>
 </template>
 
+
 <style lang="scss">
   @import "static/scss/constant";
 

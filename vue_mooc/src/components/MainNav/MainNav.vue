@@ -11,7 +11,7 @@
       <div class="item menu">
         <ul>
           <li v-if="isLogin">
-            <div @click="">{{ userName }}</div>
+            <div class="username" @click="">{{ userName }}</div>
           </li>
           <li v-else-if="isLogin">
             <div @click.prevent="">登录/注册</div>
@@ -54,10 +54,13 @@
     height: 70px;
     padding: 30px 0;
     background: $navBGColor;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    width: 100%;
 
     .banner-container {
       @include flexContainer;
-
       justify-content: space-between;
 
       .item {
@@ -89,6 +92,12 @@
             background: $inputBGColor;
             color: $inputFontColor;
             font-weight: bold;
+            transition: .3s;
+            border-radius: 2px;
+
+            &:focus {
+              background: $inputFocusBGColor;
+            }
 
             &::-webkit-input-placeholder { /* WebKit browsers */
               color: $inputPlaceholderFontColor;
@@ -137,18 +146,40 @@
               margin: 11px;
               line-height: 14px;
 
+              div.username {
+                font-size: 12px;
+                font-weight: 400;
+                color: #e6e6b1;
+              }
+
               a {
                 text-decoration: none;
                 font-size: 12px;
-                color: #666;
+                color: #e6e6b1;
                 font-weight: bold;
               }
             }
 
             /* 关注我们 */
             &:nth-child(4) {
-              background: #f1f1f1;
+              border-radius: 3px;
               margin-left: 12px;
+              background: transparent;
+              border: 1px solid #e6e6b1;
+              cursor: pointer;
+
+              a {
+                color: #e6e6b1;
+              }
+
+
+              &:hover {
+                a {
+                  color: white;
+                }
+
+                background: #e6e6b1;
+              }
             }
           }
 
