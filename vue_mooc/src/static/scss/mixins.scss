@@ -3,7 +3,7 @@
 @mixin container {
   margin: 0 auto;
   width: $containerWidth;
-  height: 100%;
+  //height: 100%;
 }
 
 @mixin flexContainer {

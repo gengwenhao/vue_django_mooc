@@ -1,8 +1,14 @@
 <template>
   <div id="home">
     <main-nav></main-nav>
-    <banner></banner>
-    <category-menu></category-menu>
+    <div class="banner-container">
+      <div class="inner-container">
+        <category-menu></category-menu>
+        <banner></banner>
+      </div>
+    </div>
+    <course-panel></course-panel>
+    <main-footer></main-footer>
   </div>
 </template>
 
@@ -10,15 +16,31 @@
   import MainNav from '../../components/MainNav/MainNav'
   import Banner from './Banner'
   import CategoryMenu from './CategoryMenu'
+  import CoursePanel from './CoursePanel'
+  import MainFooter from '../../components/MainFooter/MainFooter'
 
   export default {
     name: "Home",
-    components: {CategoryMenu, Banner, MainNav}
+    components: {MainFooter, CoursePanel, CategoryMenu, Banner, MainNav}
   }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
+  @import "../../static/scss/mixins";
+
   #home {
     position: relative;
+    width: 100%;
+
+    .banner-container {
+      width: 100%;
+      height: 425px;
+      background: #000;
+
+      .inner-container {
+        @include container;
+        position: relative;
+      }
+    }
   }
 </style>

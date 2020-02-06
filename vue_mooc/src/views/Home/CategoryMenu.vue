@@ -32,15 +32,13 @@
   @import "../../static/scss/constant";
 
   #category-menu {
+    float: left;
     color: $menuFontColor;
     z-index: 2;
     box-sizing: border-box;
     width: 250px;
     height: 425px;
     background: $menuBGColor;
-    position: absolute;
-    top: 130px;
-    left: 10%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

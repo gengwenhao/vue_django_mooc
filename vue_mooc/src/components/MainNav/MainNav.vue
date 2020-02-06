@@ -1,6 +1,6 @@
 <template>
   <div id="main-nav">
-    <div class="container">
+    <div class="banner-container">
       <div class="item logo">
         <h1></h1>
       </div>
@@ -55,7 +55,7 @@
     padding: 30px 0;
     background: $navBGColor;
 
-    .container {
+    .banner-container {
       @include flexContainer;
 
       justify-content: space-between;

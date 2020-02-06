@@ -14,7 +14,8 @@
   }
 
   body {
-    background: $backgroundColor;
+    background: $homeBackgroundColor;
+    width: 100%;
   }
 
 </style>
