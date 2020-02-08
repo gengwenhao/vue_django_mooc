@@ -22,7 +22,8 @@ class TeacherModel(models.Model):
     """
     name = models.CharField(max_length=32, null=False, blank=False, verbose_name='讲师名称')
     nick_name = models.CharField(max_length=32, null=True, blank=True, verbose_name='讲师昵称')
-    avatar = models.ImageField(upload_to='avatars/%Y/%m/%d', default='default/avatar.png', verbose_name='头像')
+    avatar = models.ImageField(upload_to='avatars/%Y/%m/%d', default='default/avatar.png',
+                               verbose_name='头像')
     desc = models.TextField(verbose_name='讲师介绍')
     org = models.ManyToManyField(OrgModel, verbose_name='所属机构')
 
@@ -30,6 +31,7 @@ class TeacherModel(models.Model):
         db_table = 'geng_teacher'
         verbose_name = '讲师'
         verbose_name_plural = verbose_name
+        unique_together = ['name', 'nick_name', 'desc']
 
     def __str__(self):
         return f'{self.name}'
@@ -38,16 +40,64 @@ class TeacherModel(models.Model):
         return f'{self.nick_name or self.name}'
 
 
+class CourseCategoryModel(models.Model):
+    """
+        课程分类
+    """
+
+    # 分类级别
+    INDEX_CHOICES = (
+        (1, '一级分类'),
+        (2, '二级分类'),
+        (3, '三级分类'),
+    )
+
+    title = models.CharField(max_length=32, verbose_name='分类名')
+    name = models.CharField(max_length=32, null=True, blank=True, verbose_name='分类别名')
+    level = models.PositiveSmallIntegerField(default=1, choices=INDEX_CHOICES,
+                                             verbose_name='分类级别')
+    parent = models.ForeignKey('CourseCategoryModel', null=True, blank=True,
+                               on_delete=models.DO_NOTHING, verbose_name='上级分类')
+
+    class Meta:
+        db_table = 'geng_course_category'
+        verbose_name = '分类'
+        verbose_name_plural = verbose_name
+        unique_together = ['title', 'name']
+
+    def __str__(self):
+        return f'{self.get_name()}'
+
+    def get_name(self):
+        """
+            获取分类名，有别名优先显示别名
+        :return:
+        """
+        return self.name or self.title
+
+
 class CourseModel(models.Model):
     """
         课程
     """
-    title = models.CharField(max_length=32, verbose_name='标题')
-    sub_title = models.CharField(max_length=32, verbose_name='副标题')
-    desc = models.TextField(verbose_name='描述')
+    title = models.CharField(max_length=32, unique=True, verbose_name='标题')
+    cover_img = models.ImageField(upload_to='course/cover/%Y/%m/%d',
+                                  default='default/course_cover.png',
+                                  verbose_name='课程封面')
+    teacher = models.ForeignKey('TeacherModel', null=True, blank=True,
+                                on_delete=models.DO_NOTHING, verbose_name='讲师')
+    sub_title = models.CharField(null=True, blank=TeacherModel, max_length=32, verbose_name='副标题')
+    desc = models.TextField(null=True, blank=True, verbose_name='描述')
+    h5_desc = models.TextField(null=True, blank=True, verbose_name='html格式描述内容')
+    url = models.TextField(null=True, blank=True, verbose_name='课程链接')
+    video_url = models.TextField(null=True, blank=True, verbose_name='视频链接(课程只有唯一视频时启用)')
     price = models.CharField(max_length=11, default='免费', verbose_name='价格')
     has_activity_price = models.BooleanField(default=False, verbose_name='是否有活动价格')
     activity_price = models.CharField(max_length=11, default='免费', verbose_name='活动价格')
+    category = models.ForeignKey('CourseCategoryModel', on_delete=models.DO_NOTHING, verbose_name='课程类别')
+    has_chapter = models.BooleanField(default=False, verbose_name='是否具有章节')
+    chapter = models.ForeignKey('ChapterModel', null=True, blank=True, on_delete=models.DO_NOTHING,
+                                verbose_name='课程的所有章节')
 
     class Meta:
         db_table = 'geng_course'
@@ -63,3 +113,42 @@ class CourseModel(models.Model):
         :return:
         """
         return self.activity_price if self.has_activity_price else self.price
+
+
+class ChapterModel(models.Model):
+    """
+        课程下章节
+    """
+    title = models.CharField(max_length=32, unique=True, default='最新章节',
+                             verbose_name='章节名称')
+    lesson = models.ForeignKey('ChapterLessonModel', null=True, blank=True,
+                               on_delete=models.DO_NOTHING, verbose_name='课时')
+    joined_time = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'geng_course_chapter'
+        get_latest_by = 'index'
+        verbose_name = '课程章节'
+        verbose_name_plural = verbose_name
+        ordering = ['pk']
+
+    def __str__(self):
+        return f'{self.title}'
+
+
+class ChapterLessonModel(models.Model):
+    """
+        章节下面的课时
+    """
+    title = models.CharField(max_length=32, default='最新课时', verbose_name='课时标题')
+    joined_item = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'geng_course_chapter_lesson'
+        get_latest_by = 'index'
+        verbose_name = '课程章节课时'
+        verbose_name_plural = verbose_name
+        ordering = ['pk']
+
+    def __str__(self):
+        return f'{self.pk}.{self.title}'

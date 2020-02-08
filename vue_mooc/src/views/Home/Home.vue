@@ -4,7 +4,7 @@
     <toolbar></toolbar>
     <div class="banner-container">
       <div class="inner-container">
-        <category-menu></category-menu>
+        <banner-menu></banner-menu>
         <banner></banner>
       </div>
     </div>
@@ -16,14 +16,14 @@
 <script>
   import MainNav from '../../components/MainNav/MainNav'
   import Banner from './Banner'
-  import CategoryMenu from './CategoryMenu'
+  import BannerMenu from './BannerMenu'
   import CoursePanel from './CoursePanel'
   import MainFooter from '../../components/MainFooter/MainFooter'
   import Toolbar from '../../components/Toolbar/Toolbar'
 
   export default {
     name: "Home",
-    components: {Toolbar, MainFooter, CoursePanel, CategoryMenu, Banner, MainNav}
+    components: {Toolbar, MainFooter, CoursePanel, BannerMenu, Banner, MainNav}
   }
 </script>
 

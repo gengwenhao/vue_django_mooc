@@ -21,7 +21,6 @@
               <div class="price">{{course.price}}</div>
             </div>
           </div>
-
         </div>
 
       </div>

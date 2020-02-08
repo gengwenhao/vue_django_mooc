@@ -1,8 +1,8 @@
 <template>
   <div id="toolbar">
     <div class="item-list">
-      <div class="item"><i class="iconfont icon-code"></i></div>
-      <div class="item"><i class="iconfont icon-pen"></i></div>
+      <div @click="handleMsgSendClick" class="item"><i class="iconfont icon-code"></i></div>
+      <div @click="handelCodeClick" class="item"><i class="iconfont icon-pen"></i></div>
       <div @click="toTop" class="item"><i class="iconfont icon-top"></i></div>
     </div>
   </div>
@@ -12,6 +12,12 @@
   export default {
     name: "Toolbar",
     methods: {
+      handleMsgSendClick() {
+        alert('跳转到留言')
+      },
+      handelCodeClick() {
+        alert('显示二维码')
+      },
       toTop() {
         let timer = setInterval(function () {
           let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -42,15 +48,16 @@
         line-height: 60px;
         text-align: center;
         cursor: pointer;
-        border: 1px solid rgba(51, 51, 51, 0.24);
+        border: 1px solid rgba(white, .9);
         transition: all 0.3s ease;
 
         &:hover {
-          background: rgba(0, 0, 0, 0.13);
+          background: rgba(white, .9);
         }
 
         i {
           font-size: 30px;
+          color: #b7b787;
         }
       }
     }

@@ -5,8 +5,11 @@
         <h1></h1>
       </div>
       <div class="item search">
-        <input type="text" placeholder="搜索课程、视频、公开课策划">
-        <i class="btn-search iconfont icon-search"></i>
+        <input v-model="inputVal"
+               @input="handleFind"
+               @keyup.enter="handleSearch" type="text"
+               placeholder="搜索课程、视频">
+        <i @click="handleSearch" class="btn-search iconfont icon-search"></i>
       </div>
       <div class="item menu">
         <ul>
@@ -23,11 +26,23 @@
         <ul>
           <li><a href="">个人中心<i class="iconfont icon-xia"></i> </a></li>
         </ul>
-        <ul>
-          <li><a href=""><i style="font-size: 9px;margin-right: 4px;"
-                            class="iconfont icon-add1"></i>关注我们</a></li>
+        <ul @click="isShowFollowPanel=true">
+          <li><a>
+            <i style="font-size: 9px;margin-right: 4px;"
+               class="iconfont icon-add1"></i>关注我们</a>
+          </li>
         </ul>
       </div>
+
+      <!--   关注微博和豆瓣   -->
+      <transition name="fade">
+        <div @mouseleave="isShowFollowPanel=false" v-if="isShowFollowPanel" class="follow-panel">
+          <a @click="isShowFollowPanel=false" target="_blank" href="https://weibo.com/u/6739481217"><i
+                  class="iconfont icon-weibo"></i></a>
+          <a @click="isShowFollowPanel=false" target="_blank" href="https://m.douban.com/people/206126259"><i
+                  class="iconfont icon-douban"></i></a>
+        </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -37,11 +52,28 @@
 
   export default {
     name: "MainNav",
+    data() {
+      return {
+        inputVal: '',
+        findCourse: [],
+        isShowFollowPanel: false
+      }
+    },
     computed: {
       ...mapState([
         'isLogin',
         'userName'
       ])
+    },
+    methods: {
+      handleFind() {
+        if (this.inputVal) {
+          console.log(`查找"${this.inputVal}"相关内容`)
+        }
+      },
+      handleSearch() {
+        alert('搜索课程')
+      }
     }
   }
 </script>
@@ -51,6 +83,10 @@
   @import "../../static/scss/mixins.scss";
 
   #main-nav {
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
     height: 70px;
     padding: 30px 0;
     background: $navBGColor;
@@ -164,25 +200,43 @@
             &:nth-child(4) {
               border-radius: 3px;
               margin-left: 12px;
-              background: transparent;
+              background: #e6e6b1;
               border: 1px solid #e6e6b1;
               cursor: pointer;
 
               a {
-                color: #e6e6b1;
-              }
-
-
-              &:hover {
-                a {
-                  color: white;
-                }
-
-                background: #e6e6b1;
+                color: white;
               }
             }
           }
+        }
+      }
 
+      .follow-panel {
+        width: 87px;
+        line-height: 50px;
+        text-align: center;
+        position: absolute;
+        right: 0;
+        top: 50px;
+        display: flex;
+        justify-content: space-around;
+
+        a {
+          text-decoration: none;
+          outline: none;
+
+          &:nth-child(1) {
+            color: #ff346a;
+          }
+
+          &:nth-child(2) {
+            color: darkseagreen;
+          }
+
+          i {
+            font-size: 23px;
+          }
         }
       }
     }

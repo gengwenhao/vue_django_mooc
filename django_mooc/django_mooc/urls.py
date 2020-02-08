@@ -16,13 +16,15 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
-from banner.views import BannerView
+from course.views import AddCourseView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('banner/', BannerView.as_view()),
+    # 首页url转发
+    path('home/', include('home.urls', namespace='home')),
+    path('add_course/', AddCourseView.as_view()),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
