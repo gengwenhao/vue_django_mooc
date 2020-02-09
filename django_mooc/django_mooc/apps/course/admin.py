@@ -3,37 +3,41 @@ from django.contrib import admin
 from course.models import *
 
 
-@admin.register(CourseCategoryModel)
-class CourseCategoryAdmin(admin.ModelAdmin):
-    list_display = ['title', 'level', 'parent']
-    ordering = ['level']
-
-
-@admin.register(CourseModel)
+@admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ['title', 'sub_title', 'desc',
-                    'url', 'video_url', 'has_chapter',
-                    'price', 'has_activity_price',
-                    'activity_price']
-    search_fields = ['title', 'sub_title', 'desc']
-    ordering = ['title', 'sub_title', 'price']
+    pass
 
 
-@admin.register(OrgModel)
-class OrgAdmin(admin.ModelAdmin):
-    list_display = ['name']
-    search_fields = ['name']
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    pass
 
 
-@admin.register(TeacherModel)
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Teacher)
 class TeacherAdmin(admin.ModelAdmin):
-    list_display = ['name', 'nick_name', 'desc']
-    search_fields = ['name', 'nick_name']
-    ordering = ['name', 'nick_name']
+    pass
 
 
-@admin.register(ChapterModel)
+@admin.register(Chapter)
 class ChapterAdmin(admin.ModelAdmin):
-    list_display = ['title']
+    pass
 
 
+@admin.register(Lesson)
+class LessonAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(BannerNav)
+class NavAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Banner)
+class BannerAdmin(admin.ModelAdmin):
+    pass

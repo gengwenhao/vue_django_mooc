@@ -7,9 +7,10 @@ const routes = [
     component: Home
   },
   {
-    path: '/course_detail/:id',
-    name: 'course_detail',
-    component: () => import('../views/CourseDetail/CourseDetail')
+    path: '/search_result/:searchKey',
+    name: 'search_result',
+    component: () => import('../views/SearchResult/SearchResult'),
+    props: { default: true, sidebar: false }
   }
 ]
 

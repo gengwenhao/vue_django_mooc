@@ -1,21 +1,21 @@
-from django.http import JsonResponse
-from django.views import View
+from rest_framework import generics
 
-from course.models import (
-    CourseModel
-)
+from course.models import *
+from course.paginations import *
+from course.serializers import *
 
 
-class AddCourseView(View):
-    def post(self, request):
-        cover_img = request.FILES.get('bigPicUrl')
+class CourseListView(generics.ListAPIView):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+    pagination_class = CoursePagination
 
-        CourseModel.objects.create(
-            category_id=1,
-            title=request.POST.get('title'),
-            desc=request.POST.get('description'),
-            url=request.POST.get('courseUrl'),
-            cover_img=cover_img
-        )
 
-        return JsonResponse({'status': 'success'})
+class BannerListView(generics.ListAPIView):
+    queryset = Banner.objects.all()
+    serializer_class = BannerSerializer
+
+
+class BannerNavListView(generics.ListAPIView):
+    queryset = BannerNav.objects.all()
+    serializer_class = NavSerializer

@@ -17,14 +17,22 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
+from rest_framework.documentation import include_docs_urls
 
-from course.views import AddCourseView
+# Routers provide an easy way of automatically determining the URL conf.
+from course.views import *
+
+router = routers.DefaultRouter()
+# router.register(r'users', UserViewSet)
 
 urlpatterns = [
+    path('', include(router.urls)),
     path('admin/', admin.site.urls),
-    # 首页url转发
-    path('home/', include('home.urls', namespace='home')),
-    path('add_course/', AddCourseView.as_view()),
+    path('course/', CourseListView.as_view()),
+    path('banner/', BannerListView.as_view()),
+    path('banner_nav/', BannerNavListView.as_view()),
+    # path('docs/', include_docs_urls('小耿课堂')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

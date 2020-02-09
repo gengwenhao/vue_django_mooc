@@ -4,11 +4,11 @@
     <toolbar></toolbar>
     <div class="banner-container">
       <div class="inner-container">
-        <banner-menu></banner-menu>
+        <banner-nav></banner-nav>
         <banner></banner>
       </div>
     </div>
-    <course-panel></course-panel>
+    <course-list></course-list>
     <main-footer></main-footer>
   </div>
 </template>
@@ -16,14 +16,14 @@
 <script>
   import MainNav from '../../components/MainNav/MainNav'
   import Banner from './Banner'
-  import BannerMenu from './BannerMenu'
-  import CoursePanel from './CoursePanel'
+  import BannerNav from './BannerNav'
+  import CourseList from './CourseList'
   import MainFooter from '../../components/MainFooter/MainFooter'
   import Toolbar from '../../components/Toolbar/Toolbar'
 
   export default {
     name: "Home",
-    components: {Toolbar, MainFooter, CoursePanel, BannerMenu, Banner, MainNav}
+    components: {BannerNav, Toolbar, MainFooter, CourseList, Banner, MainNav}
   }
 </script>
 

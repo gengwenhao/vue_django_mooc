@@ -1,15 +1,15 @@
-import {getBanner, getBannerMenu} from '../api/api'
+import {getBanner, getBannerNav} from '../api/api'
 
 
 const actions = {
   updateBanner({commit}) {
     getBanner().then(res => {
-      commit('SET_BANNER', res.data)
+      commit('SET_BANNER', res.data.results)
     })
   },
-  updateBannerMenu({commit}) {
-    getBannerMenu().then(res => {
-      commit('SET_BANNER_MENU', res.data)
+  updateBannerNav({commit}) {
+    getBannerNav().then(res => {
+      commit('SET_BANNER_NAV', res.data.results)
     })
   }
 }
