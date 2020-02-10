@@ -99,7 +99,7 @@ class Course(models.Model):
     cover_img = models.ImageField(upload_to='course/cover/%Y/%m/%d',
                                   default='default/course_cover.png',
                                   verbose_name='课程封面')
-    teachers = models.ManyToManyField(to='Teacher', verbose_name='讲师')
+    teachers = models.ManyToManyField(to='Teacher', blank=True, verbose_name='讲师')
     sub_title = models.CharField(null=True, blank=True, max_length=32, verbose_name='副标题')
     desc = models.TextField(null=True, blank=True, verbose_name='描述')
     h5_desc = models.TextField(null=True, blank=True, verbose_name='h5格式描述')

@@ -20,19 +20,18 @@ from django.urls import path, include
 from rest_framework import routers
 from rest_framework.documentation import include_docs_urls
 
-# Routers provide an easy way of automatically determining the URL conf.
-from course.views import *
+from course import views
 
+# 注册view set
 router = routers.DefaultRouter()
-# router.register(r'users', UserViewSet)
+router.register('course', views.CourseViewSet)
+router.register('banner', views.BannerViewSet)
+router.register('banner_nav', views.BannerNavViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
-    path('course/', CourseListView.as_view()),
-    path('banner/', BannerListView.as_view()),
-    path('banner_nav/', BannerNavListView.as_view()),
-    # path('docs/', include_docs_urls('小耿课堂')),
+    path('docs/', include_docs_urls('小耿课堂')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

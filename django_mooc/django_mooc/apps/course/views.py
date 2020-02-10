@@ -1,21 +1,21 @@
-from rest_framework import generics
+from rest_framework import viewsets
+from rest_framework import mixins
 
-from course.models import *
 from course.paginations import *
 from course.serializers import *
 
 
-class CourseListView(generics.ListAPIView):
+class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
     pagination_class = CoursePagination
 
 
-class BannerListView(generics.ListAPIView):
+class BannerViewSet(viewsets.ModelViewSet):
     queryset = Banner.objects.all()
     serializer_class = BannerSerializer
 
 
-class BannerNavListView(generics.ListAPIView):
+class BannerNavViewSet(viewsets.ModelViewSet):
     queryset = BannerNav.objects.all()
     serializer_class = NavSerializer
