@@ -1,3 +1,4 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework import mixins
 
@@ -9,6 +10,8 @@ class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
     pagination_class = CoursePagination
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = ('tag__name', 'tag',)
 
 
 class BannerViewSet(viewsets.ModelViewSet):

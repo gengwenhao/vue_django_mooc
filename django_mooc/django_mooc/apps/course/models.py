@@ -25,7 +25,7 @@ class Teacher(models.Model):
     avatar = models.ImageField(upload_to='avatars/%Y/%m/%d', default='default/avatar.png',
                                verbose_name='头像')
     desc = models.TextField(verbose_name='讲师介绍')
-    org = models.ManyToManyField(Org, verbose_name='所属机构')
+    org = models.ManyToManyField(Org, blank=True, verbose_name='所属机构')
 
     class Meta:
         db_table = 'geng_teacher'
@@ -96,9 +96,7 @@ class Course(models.Model):
         课程
     """
     title = models.CharField(max_length=32, unique=True, verbose_name='标题')
-    cover_img = models.ImageField(upload_to='course/cover/%Y/%m/%d',
-                                  default='default/course_cover.png',
-                                  verbose_name='课程封面')
+    cover_img = models.ImageField(upload_to='course/cover/%Y/%m/%d', verbose_name='课程封面')
     teachers = models.ManyToManyField(to='Teacher', blank=True, verbose_name='讲师')
     sub_title = models.CharField(null=True, blank=True, max_length=32, verbose_name='副标题')
     desc = models.TextField(null=True, blank=True, verbose_name='描述')

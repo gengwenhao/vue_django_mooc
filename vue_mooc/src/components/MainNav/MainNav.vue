@@ -35,7 +35,9 @@
       </div>
 
       <!--   关注微博和豆瓣   -->
-      <transition name="fade">
+      <transition name="fade"
+                  enter-active-class="animated swing"
+                  leave-active-class="animated fadeOut">
         <div @mouseleave="isShowFollowPanel=false" v-if="isShowFollowPanel" class="follow-panel">
           <a @click="isShowFollowPanel=false" target="_blank" href="https://weibo.com/u/6739481217"><i
                   class="iconfont icon-weibo"></i></a>
@@ -49,6 +51,7 @@
 
 <script>
   import {mapState} from 'vuex'
+  import '../../static/css/animate.css'
 
   export default {
     name: "MainNav",

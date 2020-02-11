@@ -44,7 +44,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # plugins
+    'django_filters',
     'rest_framework',
+    # models
     'users',
     'course.apps.CourseConfig',
 ]

@@ -1,7 +1,6 @@
 <template>
   <div id="course-list">
 
-
     <div class="category-container">
       <div class="container">
         <div class="category-list">
@@ -10,18 +9,18 @@
             今日秒杀
           </h1>
           <div class="course-panel">
-            <div class="course-card">
-              <div class="img-cover"><img src="http://open-image.ws.126.net/0f29929a65e541f795592e44ad3d5aaf.jpg"
-                                          alt=""></div>
-              <div class="title">0元阅读365本书，3步打造完整知识体系</div>
-              <div class="desc">豆瓣BBC纽约时报好书排行 Top365</div>
-              <div class="price">免费</div>
+            <div v-for="course in homeCourses.JRMS" class="course-card">
+              <div class="img-cover"><img :src="course.cover_img" alt=""></div>
+              <div class="course-info">
+                <div class="title">{{course.title}}</div>
+                <div class="sub-title">{{course.sub_title}}</div>
+                <div class="price">{{course.price}}</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
 
     <div class="category-container">
       <div class="container">
@@ -31,12 +30,13 @@
             计算机
           </h1>
           <div class="course-panel">
-            <div class="course-card">
-              <div class="img-cover"><img src="http://open-image.ws.126.net/0f29929a65e541f795592e44ad3d5aaf.jpg"
-                                          alt=""></div>
-              <div class="title">0元阅读365本书，3步打造完整知识体系</div>
-              <div class="desc">豆瓣BBC纽约时报好书排行 Top365</div>
-              <div class="price">免费</div>
+            <div v-for="course in homeCourses.JSJ" class="course-card">
+              <div class="img-cover"><img :src="course.cover_img" alt=""></div>
+              <div class="course-info">
+                <div class="title">{{course.title}}</div>
+                <div class="sub-title">{{course.sub_title}}</div>
+                <div class="price">{{course.price}}</div>
+              </div>
             </div>
           </div>
         </div>
@@ -51,18 +51,18 @@
             TED
           </h1>
           <div class="course-panel">
-            <div class="course-card">
-              <div class="img-cover"><img src="http://open-image.ws.126.net/0f29929a65e541f795592e44ad3d5aaf.jpg"
-                                          alt=""></div>
-              <div class="title">0元阅读365本书，3步打造完整知识体系</div>
-              <div class="desc">豆瓣BBC纽约时报好书排行 Top365</div>
-              <div class="price">免费</div>
+            <div v-for="course in homeCourses.TED" class="course-card">
+              <div class="img-cover"><img :src="course.cover_img" alt=""></div>
+              <div class="course-info">
+                <div class="title">{{course.title}}</div>
+                <div class="sub-title">{{course.sub_title}}</div>
+                <div class="price">{{course.price}}</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
 
     <div class="category-container">
       <div class="container">
@@ -72,18 +72,18 @@
             商业财经
           </h1>
           <div class="course-panel">
-            <div class="course-card">
-              <div class="img-cover"><img src="http://open-image.ws.126.net/0f29929a65e541f795592e44ad3d5aaf.jpg"
-                                          alt=""></div>
-              <div class="title">0元阅读365本书，3步打造完整知识体系</div>
-              <div class="desc">豆瓣BBC纽约时报好书排行 Top365</div>
-              <div class="price">免费</div>
+            <div v-for="course in homeCourses.SYCJ" class="course-card">
+              <div class="img-cover"><img :src="course.cover_img" alt=""></div>
+              <div class="course-info">
+                <div class="title">{{course.title}}</div>
+                <div class="sub-title">{{course.sub_title}}</div>
+                <div class="price">{{course.price}}</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
 
     <div class="category-container">
       <div class="container">
@@ -93,18 +93,18 @@
             生活百科
           </h1>
           <div class="course-panel">
-            <div class="course-card">
-              <div class="img-cover"><img src="http://open-image.ws.126.net/0f29929a65e541f795592e44ad3d5aaf.jpg"
-                                          alt=""></div>
-              <div class="title">0元阅读365本书，3步打造完整知识体系</div>
-              <div class="desc">豆瓣BBC纽约时报好书排行 Top365</div>
-              <div class="price">免费</div>
+            <div v-for="course in homeCourses.SHBK" class="course-card">
+              <div class="img-cover"><img :src="course.cover_img" alt=""></div>
+              <div class="course-info">
+                <div class="title">{{course.title}}</div>
+                <div class="sub-title">{{course.sub_title}}</div>
+                <div class="price">{{course.price}}</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
 
   </div>
 </template>
@@ -115,13 +115,25 @@
   export default {
     name: "CourseList",
     computed: {
-      ...mapState([])
+      ...mapState([
+        'homeCourses'
+      ])
     },
     methods: {
-      ...mapActions([])
+      ...mapActions([
+        'updateHomeJRMS',
+        'updateHomeJSJ',
+        'updateHomeTED',
+        'updateHomeSYCJ',
+        'updateHomeSHBK'
+      ])
     },
     created() {
-
+      this.updateHomeJRMS()
+      this.updateHomeJSJ()
+      this.updateHomeTED()
+      this.updateHomeSYCJ()
+      this.updateHomeSHBK()
     }
   }
 </script>
@@ -211,41 +223,51 @@
                 width: 260px;
                 height: 150px;
                 overflow: hidden;
+                text-align: center;
 
                 img {
+                  display: inline-block;
                   width: 100%;
                   height: 100%;
                   transition: all 0.8s ease;
                 }
               }
 
-              .title {
-                height: 42px;
-                padding: 12px 9px 0;
-                font-size: 18px;
-                font-weight: 400;
-                font-family: "Microsoft YaHei UI", "Arial", "Hiragino Sans GB", 宋体, "Georgia", "serif";
-                text-shadow: 0 1px 1px hsla(0, 0%, 100%, .3);
-              }
-
-              .desc {
-                padding: 0 9px;
+              .course-info {
+                padding: 12px;
                 position: relative;
-                margin-top: .75em;
-                overflow: hidden;
-                color: #999;
-                font-size: 14px;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                font-family: "Microsoft YaHei UI", "Arial", "Hiragino Sans GB", 宋体, "Georgia", "serif";
-              }
+                height: 110px;
 
-              .price {
-                padding: 23px 9px;
-                font-size: 18px;
-                color: #ff746d;
-                font-weight: 500;
-                font-family: "Microsoft YaHei UI", "Arial", "Hiragino Sans GB", 宋体, "Georgia", "serif";
+                .title {
+                  color: #333;
+                  max-height: 42px;
+                  font-size: 18px;
+                  line-height: 1.25;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  text-align: left;
+                  font-family: 'Microsoft YaHei UI', 'Microsoft YaHei', Helvetica, Arial, sans-serif;
+                }
+
+                .sub-title {
+                  position: relative;
+                  margin-top: .75em;
+                  overflow: hidden;
+                  color: #999;
+                  font-size: 14px;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                  font-family: 'Microsoft YaHei UI', 'Microsoft YaHei', Helvetica, Arial, sans-serif;
+                }
+
+                .price {
+                  position: absolute;
+                  bottom: 14px;
+                  font-size: 18px;
+                  color: #ff746d;
+                  font-weight: 500;
+                  font-family: 'Microsoft YaHei UI', 'Microsoft YaHei', Helvetica, Arial, sans-serif;
+                }
               }
             }
           }
