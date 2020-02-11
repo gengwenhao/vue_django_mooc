@@ -2,7 +2,7 @@
 
 <h1 align="center">基于vue和django的在线视频教学网站</h4>
 <p align="center">
-    <a href="//github.com/gengwenhao/vue_django_mooc"><img src="https://img.shields.io/github/license/gengwenhao/vue_django_mooc" alt="License"><a href="//github.com/gengwenhao/vue_django_mooc"><img src="https://img.shields.io/pypi/pyversions/Django" alt="License"><a href="//github.com/gengwenhao/vue_django_mooc"><img src="https://img.shields.io/github/repo-size/gengwenhao/vue_django_mooc"><a href="//github.com/gengwenhao/vue_django_mooc"><img src="https://img.shields.io/github/languages/code-size/gengwenhao/vue_django_mooc"><a href="//github.com/gengwenhao/vue_django_mooc"><img src="https://img.shields.io/github/languages/count/gengwenhao/vue_django_mooc"><a href="//github.com/gengwenhao/vue_django_mooc"><img src="https://img.shields.io/github/languages/top/gengwenhao/vue_django_mooc">
+    <a href="//github.com/gengwenhao/vue_django_mooc"><img src="https://img.shields.io/github/license/gengwenhao/vue_django_mooc" alt="License"><a href="//github.com/gengwenhao/vue_django_mooc"><img src="https://img.shields.io/pypi/pyversions/Django" alt="License"> <a href="//github.com/gengwenhao/vue_django_mooc"><img src="https://img.shields.io/github/repo-size/gengwenhao/vue_django_mooc"> <a href="//github.com/gengwenhao/vue_django_mooc"><img src="https://img.shields.io/github/languages/code-size/gengwenhao/vue_django_mooc"> <a href="//github.com/gengwenhao/vue_django_mooc"><img src="https://img.shields.io/github/languages/count/gengwenhao/vue_django_mooc"> <a href="//github.com/gengwenhao/vue_django_mooc"><img src="https://img.shields.io/github/languages/top/gengwenhao/vue_django_mooc">
 </p>
 
 
@@ -15,11 +15,13 @@
 
 
 
+
 ## 项目预览
 
 <h4 align="center">首页</h4>
 
 ![](vue_mooc/public/首页.png)
+
 
 
 
