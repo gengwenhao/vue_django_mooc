@@ -6,7 +6,8 @@
 </p>
 
 
-<h4 align="center">首页预览</h4>
-![](vue_mooc/public/首页.png)
+
+
+![首页预览](vue_mooc/public/首页.png)
 
 
