@@ -6,17 +6,12 @@
 </p>
 
 
-## 项目依赖
-
 | 语言环境 |              node.js>=12.14.1 和 python>=3.7.4               |
 | :------- | :----------------------------------------------------------: |
 | 前端     | "axios": "^0.19.2"，"vue": "^2.6.10"，"vue-awesome-swiper": "^3.1.3"，"vue-router":"^3.1.3"，"vuex": "^3.1.2""mockjs": "^1.1.0"，"sass": "^1.23.7"，"sass-loader": "^8.0.0"， |
 | 后端     | coreapi==2.3.3，coreschema==0.0.4，Django==3.0.1，django-filter==2.2.0，django-guardian==2.2.0，django-simpleui==3.9，djangorestframework==3.11.0，Pillow==7.0.0， |
 
 
-
-
-## 项目预览
 
 <h4 align="center">首页</h4>
 
