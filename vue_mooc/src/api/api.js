@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {urlEncode} from '../lib/tool'
 
 const HOST = '/'
 
@@ -19,7 +20,7 @@ export const getSearchResult = (searchKey) => {
 
 // 获取课程
 export const getCourse = (params) => {
-  return axios.get(`${HOST}course/?tag__name=${params.tagName}`)
+  return axios.get(`${HOST}course/?${urlEncode(params)}`)
 }
 
 

@@ -4,7 +4,7 @@ const resolve = dir => {
   return path.join(__dirname, dir)
 }
 
-const BASE_URL = process.env.NODE_ENV === 'production' ? '/vue-course/' : '/'
+const BASE_URL = process.env.NODE_ENV === 'production' ? '/static/' : '/'
 
 module.exports = {
   lintOnSave: false,
@@ -17,6 +17,7 @@ module.exports = {
   // 打包时不生成.map文件
   productionSourceMap: false,
   devServer: {
+    // django 开发api地址
     proxy: 'http://localhost:8000'
   }
 }

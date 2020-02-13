@@ -5,11 +5,18 @@
         <h1></h1>
       </div>
       <div class="item search">
-        <input v-model="inputVal"
-               @input="handleFind"
-               @keyup.enter="handleSearch" type="text"
-               placeholder="搜索课程、视频">
+        <el-autocomplete
+                class="search-input"
+                v-model="inputVal"
+                :fetch-suggestions="querySearch"
+                placeholder="搜索课程、视频"
+                :trigger-on-focus="false"
+                @select="handleSelect"
+        ></el-autocomplete>
         <i @click="handleSearch" class="btn-search iconfont icon-search"></i>
+        <div class="search-suggestion">
+
+        </div>
       </div>
       <div class="item menu">
         <ul>
@@ -52,6 +59,7 @@
 <script>
   import {mapState} from 'vuex'
   import '../../static/css/animate.css'
+  import {getCourse} from '../../api/api'
 
   export default {
     name: "MainNav",
@@ -59,7 +67,8 @@
       return {
         inputVal: '',
         findCourse: [],
-        isShowFollowPanel: false
+        isShowFollowPanel: false,
+        searchSuggestions: []
       }
     },
     computed: {
@@ -69,19 +78,31 @@
       ])
     },
     methods: {
-      handleFind() {
-        if (this.inputVal) {
-          console.log(`查找"${this.inputVal}"相关内容`)
+      querySearch(queryString, cb) {
+        let search = queryString.trim()
+        if (search) {
+          getCourse({search})
+            .then(resp => {
+              cb(resp.data.results.map(item => {
+                return {...item, value: item.title}
+              }).slice(0, 6))
+            })
         }
       },
       handleSearch() {
-        alert('搜索课程')
+        let clearInputVal = this.inputVal.trim()
+        if (clearInputVal) {
+          console.log(clearInputVal)
+        }
+      },
+      handleSelect(item) {
+        console.log(item)
       }
     }
   }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   @import "../../static/scss/constant.scss";
   @import "../../static/scss/mixins.scss";
 
@@ -243,6 +264,32 @@
         }
       }
     }
+  }
 
+  // 搜索建议列表
+  .el-scrollbar__view {
+    list-style: none !important;
+    box-sizing: border-box;
+    margin-left: 1.6px;
+    width: 390px;
+    min-height: 50px;
+    background: rgba(white, .9);
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    padding-top: 4px;
+    padding-bottom: 5px;
+
+    li {
+      text-indent: 12px;
+      height: 24px;
+      line-height: 24px;
+      cursor: pointer;
+      overflow: hidden;
+      font-weight: bold;
+
+      &:hover {
+        background: #e0e0a4;
+      }
+    }
   }
 </style>
