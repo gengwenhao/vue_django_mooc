@@ -13,11 +13,6 @@ export const getBannerNav = () => {
 }
 
 
-export const getSearchResult = (searchKey) => {
-  return axios.get(`${HOST}search_result/${searchKey}`)
-}
-
-
 // 获取课程
 export const getCourse = (params) => {
   return axios.get(`${HOST}course/?${urlEncode(params)}`)

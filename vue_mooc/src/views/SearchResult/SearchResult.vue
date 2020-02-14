@@ -21,6 +21,8 @@
 
 <style scoped lang="scss">
   #search-result {
+    position: relative;
+
     .course-result-container {
       box-sizing: border-box;
       margin-top: 130px;

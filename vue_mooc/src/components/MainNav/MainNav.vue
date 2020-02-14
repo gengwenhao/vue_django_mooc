@@ -2,11 +2,12 @@
   <div id="main-nav">
     <div class="banner-container">
       <div class="item logo">
-        <h1></h1>
+        <h1 @click="handleToHomePage"></h1>
       </div>
       <div class="item search">
         <el-autocomplete
                 class="search-input"
+                @keyup.enter.native="handleSearch"
                 v-model="inputVal"
                 :fetch-suggestions="querySearch"
                 placeholder="搜索课程、视频"
@@ -57,18 +58,17 @@
 </template>
 
 <script>
-  import {mapState} from 'vuex'
+  import {mapState, mapActions} from 'vuex'
   import '../../static/css/animate.css'
   import {getCourse} from '../../api/api'
+  import {SEARCH_SUGGESTION_SIZE} from '../../config'
 
   export default {
     name: "MainNav",
     data() {
       return {
         inputVal: '',
-        findCourse: [],
         isShowFollowPanel: false,
-        searchSuggestions: []
       }
     },
     computed: {
@@ -78,25 +78,32 @@
       ])
     },
     methods: {
+      ...mapActions([
+        'updateSearchResult'
+      ]),
+      handleToHomePage() {
+        this.$router.push({path: '/'})
+      },
       querySearch(queryString, cb) {
         let search = queryString.trim()
-        if (search) {
-          getCourse({search})
+        if (search.replace(/(^\s*)|(\s*$)/g, "").length !== 0) {
+          getCourse({search, page_size: SEARCH_SUGGESTION_SIZE})
             .then(resp => {
               cb(resp.data.results.map(item => {
                 return {...item, value: item.title}
-              }).slice(0, 6))
+              }))
             })
         }
       },
       handleSearch() {
-        let clearInputVal = this.inputVal.trim()
-        if (clearInputVal) {
-          console.log(clearInputVal)
+        let searchKey = this.inputVal.trim()
+        if (searchKey) {
+          this.$router.push({name: 'searchResult', params: {searchKey}})
         }
       },
       handleSelect(item) {
-        console.log(item)
+        let searchKey = item.title
+        this.$router.push({name: 'searchResult', params: {searchKey}})
       }
     }
   }
@@ -133,6 +140,7 @@
             width: 250px;
             height: 70px;
             background: url("../../assets/logo_mini.png") no-repeat;
+            cursor: pointer;
           }
         }
 
@@ -142,9 +150,7 @@
           position: relative;
 
           input {
-            text-indent: $inputTextIndent;
             width: 348px;
-            padding-right: 42px;
             outline: none;
             border: 1px solid $inputBorderColor;
             height: 32px;
@@ -180,8 +186,8 @@
 
           .btn-search {
             color: #707070;
-            position: absolute;
-            right: 0;
+            position: relative;
+            right: 42px;
             display: block;
             width: 42px;
             height: 34px;
@@ -262,33 +268,6 @@
             font-size: 23px;
           }
         }
-      }
-    }
-  }
-
-  // 搜索建议列表
-  .el-scrollbar__view {
-    list-style: none !important;
-    box-sizing: border-box;
-    margin-left: 1.6px;
-    width: 390px;
-    min-height: 50px;
-    background: rgba(white, .9);
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    padding-top: 4px;
-    padding-bottom: 5px;
-
-    li {
-      text-indent: 12px;
-      height: 24px;
-      line-height: 24px;
-      cursor: pointer;
-      overflow: hidden;
-      font-weight: bold;
-
-      &:hover {
-        background: #e0e0a4;
       }
     }
   }

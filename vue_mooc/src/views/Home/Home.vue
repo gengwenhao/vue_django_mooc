@@ -1,7 +1,6 @@
 <template>
   <div id="home">
     <main-nav></main-nav>
-    <toolbar></toolbar>
     <div class="banner-container">
       <div class="inner-container">
         <banner-nav></banner-nav>
@@ -19,11 +18,10 @@
   import BannerNav from './BannerNav'
   import CourseList from './CourseList'
   import MainFooter from '../../components/MainFooter/MainFooter'
-  import Toolbar from '../../components/Toolbar/Toolbar'
 
   export default {
     name: "Home",
-    components: {BannerNav, Toolbar, MainFooter, CourseList, Banner, MainNav}
+    components: {BannerNav, MainFooter, CourseList, Banner, MainNav}
   }
 </script>
 

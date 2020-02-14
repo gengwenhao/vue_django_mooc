@@ -8,9 +8,9 @@ const routes = [
   },
   {
     path: '/search_result/:searchKey',
-    name: 'search_result',
+    name: 'searchResult',
     component: () => import('../views/SearchResult/SearchResult'),
-    props: { default: true, sidebar: false }
+    props: {default: true, sidebar: false}
   }
 ]
 
