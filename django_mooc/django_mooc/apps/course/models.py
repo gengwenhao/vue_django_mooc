@@ -109,8 +109,7 @@ class Course(models.Model):
     category = models.ForeignKey('Category', on_delete=models.DO_NOTHING, verbose_name='课程类别')
     tag = models.ManyToManyField('Tag', verbose_name='课程标签')
     has_chapter = models.BooleanField(default=False, verbose_name='是否具有章节')
-    chapter = models.ForeignKey('Chapter', null=True, blank=True, on_delete=models.DO_NOTHING,
-                                verbose_name='课程的所有章节')
+    chapter = models.ManyToManyField(to='Chapter', blank=True, verbose_name='课程的所有章节')
 
     class Meta:
         db_table = 'geng_course'
@@ -134,8 +133,7 @@ class Chapter(models.Model):
     """
     title = models.CharField(max_length=32, unique=True, default='最新章节',
                              verbose_name='章节名称')
-    lesson = models.ForeignKey('Lesson', null=True, blank=True,
-                               on_delete=models.DO_NOTHING, verbose_name='课时')
+    lesson = models.ManyToManyField(to='Lesson', blank=True, verbose_name='课时')
     joined_time = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -154,6 +152,7 @@ class Lesson(models.Model):
         章节课时
     """
     title = models.CharField(max_length=32, default='最新课时', verbose_name='课时标题')
+    video = models.URLField(default='https://mov.bn.netease.com/open-movie/nos/mp4/2018/11/27/ZE0MHK6MQ_sd.mp4', null=False, blank=False, verbose_name='视频链接')
     joined_item = models.DateTimeField(auto_now_add=True)
 
     class Meta:

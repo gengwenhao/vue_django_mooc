@@ -67,7 +67,7 @@ ROOT_URLCONF = 'django_mooc.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,13 +126,19 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-# 静态文件存放地址
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # 媒体文件存放地址
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
 # 媒体文件上传路径
 MEDIA_URL = '/media/'
+
+if not DEBUG:
+    # 静态文件收集地址
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
