@@ -9,7 +9,7 @@
             今日秒杀
           </h1>
           <div class="course-panel">
-            <div v-for="course in homeCourses.JRMS" class="course-card">
+            <div @click="toCourse(course.id)" :key="course.id" v-for="course in homeCourses.JRMS" class="course-card">
               <div class="img-cover"><img :src="course.cover_img" alt=""></div>
               <div class="course-info">
                 <div class="title">{{course.title}}</div>
@@ -30,7 +30,8 @@
             计算机
           </h1>
           <div class="course-panel">
-            <div v-for="course in homeCourses.JSJ" class="course-card">
+            <div @click="toCourse(course.id)" :key="course.id" v-for="course in homeCourses.JSJ"
+                 class="course-card">
               <div class="img-cover"><img :src="course.cover_img" alt=""></div>
               <div class="course-info">
                 <div class="title">{{course.title}}</div>
@@ -51,7 +52,7 @@
             TED
           </h1>
           <div class="course-panel">
-            <div v-for="course in homeCourses.TED" class="course-card">
+            <div @click="toCourse(course.id)" :key="course.id" v-for="course in homeCourses.TED" class="course-card">
               <div class="img-cover"><img :src="course.cover_img" alt=""></div>
               <div class="course-info">
                 <div class="title">{{course.title}}</div>
@@ -72,7 +73,7 @@
             商业财经
           </h1>
           <div class="course-panel">
-            <div v-for="course in homeCourses.SYCJ" class="course-card">
+            <div @click="toCourse(course.id)" :key="course.id" v-for="course in homeCourses.SYCJ" class="course-card">
               <div class="img-cover"><img :src="course.cover_img" alt=""></div>
               <div class="course-info">
                 <div class="title">{{course.title}}</div>
@@ -93,7 +94,7 @@
             生活百科
           </h1>
           <div class="course-panel">
-            <div v-for="course in homeCourses.SHBK" class="course-card">
+            <div @click="toCourse(course.id)" :key="course.id" v-for="course in homeCourses.SHBK" class="course-card">
               <div class="img-cover"><img :src="course.cover_img" alt=""></div>
               <div class="course-info">
                 <div class="title">{{course.title}}</div>
@@ -120,6 +121,9 @@
       ])
     },
     methods: {
+      toCourse(courseID) {
+        this.$router.push({name: 'fullCourse', params: {courseID}})
+      },
       ...mapActions([
         'updateHomeJRMS',
         'updateHomeJSJ',
@@ -148,7 +152,6 @@
     -webkit-user-select: none;
     box-sizing: border-box;
     margin-top: 40px;
-    padding-bottom: 170px;
     width: 100%;
 
     .category-container {
@@ -223,13 +226,18 @@
                 width: 260px;
                 height: 150px;
                 overflow: hidden;
-                text-align: center;
+                background: center no-repeat;
+                background-image: none;
+                background-size: cover;
+                -webkit-transition: 0.5s cubic-bezier(0, 0.6, 0.3, 1);
+                transition: 0.5s cubic-bezier(0, 0.6, 0.3, 1);
+                -webkit-transform-origin: bottom;
+                transform-origin: bottom;
 
                 img {
-                  display: inline-block;
+                  transition: 0.5s cubic-bezier(0, 0.6, 0.3, 1);
                   width: 100%;
                   height: 100%;
-                  transition: all 0.8s ease;
                 }
               }
 

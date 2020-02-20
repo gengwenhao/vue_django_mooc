@@ -25,9 +25,10 @@
   @import "../../static/scss/mixins";
 
   #main-footer {
+    margin-top: 50px;
     width: 100%;
-    position: absolute;
-    bottom: 0;
+    /*position: absolute;*/
+    /*bottom: 0;*/
     background: $footerBGColor;
     box-sizing: border-box;
 

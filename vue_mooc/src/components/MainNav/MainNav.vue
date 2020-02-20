@@ -230,12 +230,12 @@
             &:nth-child(4) {
               border-radius: 3px;
               margin-left: 12px;
-              background: #e6e6b1;
-              border: 1px solid #e6e6b1;
+              border: 1px solid #cccc99;
+              background: transparent;
               cursor: pointer;
 
               a {
-                color: white;
+                color: #cccc99;
               }
             }
           }

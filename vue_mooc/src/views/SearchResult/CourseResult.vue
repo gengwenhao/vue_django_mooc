@@ -7,7 +7,7 @@
       <!--   显示课程   -->
       <div class="inner" v-if="searchResult.count > 0">
         <div class="course-list">
-          <div v-for="course in searchResult.results" class="course-line">
+          <div @click="toCourse(course.id)" :key="course.id" v-for="course in searchResult.results" class="course-line">
             <div class="img-cover">
               <img :src="course.cover_img" :alt="course.desc">
             </div>
@@ -71,6 +71,9 @@
       }
     },
     methods: {
+      toCourse(courseID) {
+        this.$router.push({name: 'fullCourse', params: {courseID}})
+      },
       handleCurrentChange(val) {
         this.currentPage = val
         getCourse({search: this.searchKey, page: this.currentPage})
@@ -115,7 +118,6 @@
 
   #course-result {
     position: relative;
-    padding-bottom: 250px;
 
     .container {
       @include flexContainer;

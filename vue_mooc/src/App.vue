@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <el-backtop :bottom="100">
+      <div><i class="iconfont icon-top"></i></div>
+    </el-backtop>
     <router-view></router-view>
   </div>
 </template>

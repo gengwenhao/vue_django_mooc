@@ -19,6 +19,11 @@ export const getCourse = (params) => {
 }
 
 
+// 获取课程详尽信息
+export const getFullCourse = (courseID) => {
+  return axios.get(`${HOST}full_course/${courseID}/`)
+}
+
 
 
 
