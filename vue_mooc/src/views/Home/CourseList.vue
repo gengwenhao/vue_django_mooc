@@ -1,6 +1,5 @@
 <template>
   <div id="course-list">
-
     <div class="category-container">
       <div class="container">
         <div class="category-list">
@@ -158,7 +157,7 @@
       width: 100%;
 
       &:nth-child(2n) {
-        background: #f5f5f5;
+        background: rgba(238, 238, 238, 0.94);
 
         .category-title {
           color: goldenrod !important;

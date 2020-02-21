@@ -152,7 +152,8 @@ class Lesson(models.Model):
         章节课时
     """
     title = models.CharField(max_length=32, default='最新课时', verbose_name='课时标题')
-    video = models.URLField(default='https://mov.bn.netease.com/open-movie/nos/mp4/2018/11/27/ZE0MHK6MQ_sd.mp4', null=False, blank=False, verbose_name='视频链接')
+    video = models.URLField(default='https://mov.bn.netease.com/open-movie/nos/mp4/2018/11/27/ZE0MHK6MQ_sd.mp4',
+                            null=False, blank=False, verbose_name='视频链接')
     joined_item = models.DateTimeField(auto_now_add=True)
 
     class Meta:

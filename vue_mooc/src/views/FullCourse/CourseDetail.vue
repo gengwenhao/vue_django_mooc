@@ -57,7 +57,8 @@
         alert(lessonID)
       },
       handleBtnGoClick() {
-        alert(this.courses.currentCourse.id)
+        let lessonID = this.courses.currentCourse.chapter[0].lesson[0].id
+        this.handleToPlay(lessonID)
       }
     },
     watch: {
@@ -65,6 +66,9 @@
         this.currentPage = 1
         getFullCourse(this.courseID)
           .then(resp => {
+          })
+          .catch(error => {
+            this.$router.push({name: '404', params: {next: this.$router.path}})
           })
       }
     },
@@ -85,6 +89,9 @@
       getFullCourse(this.courseID)
         .then(resp => {
           this.$set(this.courses, 'currentCourse', resp.data)
+        })
+        .catch(error => {
+          this.$router.push({name: '404', params: {next: this.$route.path}})
         })
     }
   }

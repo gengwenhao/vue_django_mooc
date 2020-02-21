@@ -29,7 +29,7 @@
           </li>
         </ul>
         <ul>
-          <li><a href="">已购课程 <i class="iconfont icon-buyecschooseplan"></i></a></li>
+          <li><a href="">我的课程 <i class="iconfont icon-buyecschooseplan"></i></a></li>
         </ul>
         <ul>
           <li><a href="">个人中心<i class="iconfont icon-xia"></i> </a></li>
@@ -233,6 +233,14 @@
               border: 1px solid #cccc99;
               background: transparent;
               cursor: pointer;
+
+              &:hover {
+                background: #cccc99;
+
+                a{
+                  color: white;
+                }
+              }
 
               a {
                 color: #cccc99;
