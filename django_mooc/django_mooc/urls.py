@@ -16,7 +16,7 @@ router.register('banner', views.BannerViewSet)
 router.register('banner_nav', views.BannerNavViewSet)
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+    path('', include(router.urls)),
     path('admin/', admin.site.urls),
     path('docs/', include_docs_urls('小耿课堂')),
 ]
