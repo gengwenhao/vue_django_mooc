@@ -16,7 +16,8 @@ router.register('banner', views.BannerViewSet)
 router.register('banner_nav', views.BannerNavViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('', TemplateView.as_view(template_name='index.html')),
+    path('api/', include(router.urls)),
     path('admin/', admin.site.urls),
     path('docs/', include_docs_urls('小耿课堂')),
 ]
@@ -24,6 +25,3 @@ urlpatterns = [
 # 开发模式
 if settings.DEBUG:
     urlpatterns.extend(static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))
-# 生产模式
-else:
-    urlpatterns.insert(0, path('', TemplateView.as_view(template_name='index.html')))
