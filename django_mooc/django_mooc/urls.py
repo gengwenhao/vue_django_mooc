@@ -21,7 +21,9 @@ urlpatterns = [
     path('docs/', include_docs_urls('小耿课堂')),
 ]
 
+# 开发模式
 if settings.DEBUG:
     urlpatterns.extend(static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))
-# else:
-#     urlpatterns.insert(0, path('', TemplateView.as_view(template_name='index.html')))
+# 生产模式
+else:
+    urlpatterns.insert(0, path('', TemplateView.as_view(template_name='index.html')))
