@@ -1,7 +1,7 @@
 import axios from 'axios'
 import {urlEncode} from '../lib/tool'
 
-const HOST = '/'
+const HOST = '/api/'
 
 export const getBanner = () => {
   return axios.get(`${HOST}banner/`)
