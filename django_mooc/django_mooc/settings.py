@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import sys
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20
@@ -29,9 +32,6 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'django_mooc', 'apps'))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'n5xce-8f2erws+_s01e+*k%yc_p2^ofrm&v-wg-u7z80so&7y@'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -132,13 +132,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-
 # 媒体文件上传路径
 MEDIA_URL = '/media/'
 
-if not DEBUG:
+if DEBUG:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static'),
+    ]
+else:
     # 静态文件收集地址
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
