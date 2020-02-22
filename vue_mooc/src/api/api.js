@@ -3,11 +3,12 @@ import {urlEncode} from '../lib/tool'
 
 const HOST = '/api/'
 
+// 获取轮播图信息
 export const getBanner = () => {
   return axios.get(`${HOST}banner/`)
 }
 
-
+// 获取轮播图左侧的导航栏信息
 export const getBannerNav = () => {
   return axios.get(`${HOST}banner_nav/`)
 }
