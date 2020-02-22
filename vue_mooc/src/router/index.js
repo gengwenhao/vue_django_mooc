@@ -8,7 +8,7 @@ Vue.use(VueRouter)
 
 const router = new VueRouter({
   routes,
-  mode: 'history'
+  // mode: 'history'
 })
 
 // 全局前置守卫，页面标题设置和登陆拦截

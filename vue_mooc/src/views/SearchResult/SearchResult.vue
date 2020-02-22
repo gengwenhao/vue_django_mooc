@@ -27,7 +27,7 @@
       box-sizing: border-box;
       margin-top: 130px;
       padding-top: 50px;
-      min-height: 300px;
+      min-height: 550px;
     }
   }
 </style>
