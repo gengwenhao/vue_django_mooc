@@ -1,7 +1,7 @@
 <template>
   <div id="course-video">
     <main-nav></main-nav>
-    <video-player></video-player>
+    <video-panel></video-panel>
     <main-footer></main-footer>
   </div>
 </template>
@@ -9,11 +9,11 @@
 <script>
   import MainNav from '../../components/MainNav/MainNav'
   import MainFooter from '../../components/MainFooter/MainFooter'
-  import VideoPlayer from './VideoPlayer'
+  import VideoPanel from './VideoPanel'
 
   export default {
     name: "CourseVideo",
-    components: {VideoPlayer, MainFooter, MainNav}
+    components: {VideoPanel, MainFooter, MainNav}
   }
 </script>
 

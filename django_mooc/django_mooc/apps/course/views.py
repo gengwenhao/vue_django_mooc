@@ -13,7 +13,7 @@ class CourseViewSet(viewsets.ModelViewSet):
     pagination_class = CoursePagination
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
     filterset_fields = ('tag__name', 'tag',)
-    search_fields = ('title', 'sub_title')
+    search_fields = ('title', 'sub_title', 'category__name', 'category__title')
 
 
 class FullCourseViewSet(viewsets.GenericViewSet,
@@ -27,6 +27,9 @@ class FullCourseViewSet(viewsets.GenericViewSet,
 
 
 class BannerViewSet(viewsets.ModelViewSet):
+    """
+        轮播图
+    """
     queryset = Banner.objects.all()
     serializer_class = BannerSerializer
 

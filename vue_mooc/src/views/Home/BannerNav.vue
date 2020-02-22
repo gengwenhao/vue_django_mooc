@@ -2,10 +2,15 @@
   <div id="banner-nav">
     <div class="item-list">
       <div class="item" v-for="(category,index) in bannerNav" :key="index">
-        <span class="main-title">{{category.title}}</span>
-        <span class="sub-title" v-for="(subCategory, index) in category.category">
+        <router-link :to="{name:'searchResult', params:{searchKey:category.title}}" tag="span"
+                     class="main-title">
+          {{category.title}}
+        </router-link>
+        <router-link :to="{name:'searchResult', params:{searchKey:subCategory.title}}" tag="span" :key="idx"
+                     class="sub-title"
+                     v-for="(subCategory, idx) in category.category">
           {{subCategory.title}}
-        </span>
+        </router-link>
       </div>
     </div>
   </div>

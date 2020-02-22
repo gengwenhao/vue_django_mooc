@@ -2,11 +2,11 @@
   <div id="banner">
     <swiper v-if="banner.length > 0" :options="swiperOption">
       <swiper-slide v-for="(item, index) in banner" :key="index">
-        <a target="_blank" :href="item.url">
+        <router-link :to="{name: 'fullCourse', params: {courseID:item.course}}">
           <h1 class="title">{{item.title}}</h1>
           <h4 class="sub-title">{{item.sub_title}}</h4>
           <img :src="item.img" alt="item.title">
-        </a>
+        </router-link>
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
@@ -101,6 +101,7 @@
       overflow: hidden;
 
       img {
+        cursor: pointer;
         width: 960px;
         height: auto;
       }

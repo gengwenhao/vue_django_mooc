@@ -152,8 +152,7 @@ class Lesson(models.Model):
         章节课时
     """
     title = models.CharField(max_length=32, default='最新课时', verbose_name='课时标题')
-    video = models.URLField(default='https://mov.bn.netease.com/open-movie/nos/mp4/2018/11/27/ZE0MHK6MQ_sd.mp4',
-                            null=False, blank=False, verbose_name='视频链接')
+    video = models.URLField(null=False, blank=False, verbose_name='视频链接')
     joined_item = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -191,7 +190,7 @@ class Banner(models.Model):
     title = models.CharField(max_length=32, verbose_name='标题')
     sub_title = models.CharField(max_length=32, null=True, blank=True, verbose_name='副标题')
     ordering = models.PositiveSmallIntegerField(default=1, verbose_name='轮播图序号')
-    url = models.URLField(default='/', verbose_name='跳转链接')
+    course = models.ForeignKey(to=Course, blank=True, null=True, on_delete=models.DO_NOTHING, verbose_name='关联课程')
     img = models.ImageField(upload_to='banners/%Y/%m/%d', default='default/banner.png',
                             verbose_name='图片（建议尺寸960*425）')
 

@@ -1,5 +1,5 @@
 <template>
-  <div id="video-player">
+  <div id="video-panel">
     <div class="video-box">
       <div class="inner">
         <el-breadcrumb class="bread" separator-class="el-icon-arrow-right">
@@ -8,9 +8,7 @@
           </el-breadcrumb-item>
         </el-breadcrumb>
         <div class="player">
-          <video id="myVideo" class="video-js">
-            <source :src="videoURL" type="video/mp4">
-          </video>
+          <video-player v-if="videoOptions.sources.length > 0" :options="videoOptions"></video-player>
           <div class="play-list">
             <h3>选集</h3>
             <div class="list">
@@ -19,8 +17,9 @@
                         :title="chapter.title"
                         :key="chapter.id"
                         v-for="chapter in courses.currentCourse.chapter">
-                  <div>用户决策：根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</div>
-                  <div>结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</div>
+                  <ul v-if="chapter.lesson.length > 0">
+                    <li :key="lesson.id" v-for="lesson in chapter.lesson">{{lesson.title}}</li>
+                  </ul>
                 </el-collapse-item>
               </el-collapse>
             </div>
@@ -33,37 +32,28 @@
 
 <script>
   import {getFullCourse} from '../../api/api'
+  import VideoPlayer from '../../components/VideoPlayer/VideoPlayer'
 
   export default {
-    name: "VideoPlayer",
-    mounted() {
-      this.initVideo()
-    },
-    methods: {
-      initVideo() {
-        //初始化视频方法
-        let myPlayer = this.$video(myVideo, {
-          //确定播放器是否具有用户可以与之交互的控件。没有控件，启动视频播放的唯一方法是使用autoplay属性或通过Player API。
-          controls: true,
-          //自动播放属性,muted:静音播放
-          // autoplay: "muted",
-          // autoplay: "play",
-          //建议浏览器是否应在<video>加载元素后立即开始下载视频数据。
-          preload: "auto",
-          //设置视频播放器的显示宽度（以像素为单位）
-          width: "860px",
-          //设置视频播放器的显示高度（以像素为单位）
-          height: "480px"
-        })
-      }
-    },
+    name: "VideoPanel",
+    components: {VideoPlayer},
     watch: {
       '$route': function (to, from) {
         getFullCourse(this.courseID)
           .then(resp => {
             this.$set(this.courses, 'currentCourse', resp.data)
+
+            let chapterList = resp.data.chapter.filter(item => item.id == this.chapterID)
+            let lesson = chapterList.length > 0 ? chapterList[0].lesson.filter(item => item.id == this.lessonID) : []
+            let src = lesson.length > 0 ? lesson[0].video : '#'
+
+            this.videoOptions.sources.push({
+              src,
+              type: "video/mp4"
+            })
           })
           .catch(error => {
+            console.log(error)
             this.$router.push({name: '404', params: {next: this.$route.path}})
           })
       }
@@ -83,6 +73,13 @@
       return {
         courses: {
           currentCourse: {}
+        },
+        videoOptions: {
+          "controls": true,
+          // "autoplay": "play",
+          "width": "860px",
+          "height": "480px",
+          "sources": []
         }
       }
     },
@@ -90,8 +87,18 @@
       getFullCourse(this.courseID)
         .then(resp => {
           this.$set(this.courses, 'currentCourse', resp.data)
+
+          let chapterList = resp.data.chapter.filter(item => item.id == this.chapterID)
+          let lesson = chapterList.length > 0 ? chapterList[0].lesson.filter(item => item.id == this.lessonID) : []
+          let src = lesson.length > 0 ? lesson[0].video : '#'
+
+          this.videoOptions.sources.push({
+            src,
+            type: "video/mp4"
+          })
         })
         .catch(error => {
+          console.log(error)
           this.$router.push({name: '404', params: {next: this.$route.path}})
         })
     }
@@ -101,21 +108,11 @@
 <style lang="scss">
   @import "../../static/scss/mixins";
 
-  #video-player {
+  #video-panel {
     padding-top: 130px;
     min-height: 650px;
     background: #f8f8f8;
 
-    /* 播放器按钮 */
-    .vjs-big-play-button {
-      position: absolute;
-      border-color: #ff1b1b;
-      background: #ff1b1b;
-      color: white;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-    }
 
     .video-box {
       height: 600px;
@@ -143,14 +140,7 @@
           align-items: center;
           width: 100%;
 
-          #myVideo {
-
-            video {
-              width: 860px;
-              height: 480px;
-            }
-          }
-
+          // 播放列表部分
           .play-list {
             background: rgba(51, 51, 51, 0.8);
             height: 480px;
@@ -182,26 +172,40 @@
               .el-collapse {
                 background: #3b3b3b;
 
+                /* 章节标题 */
                 .el-collapse-item__header {
                   background: #3b3b3b;
                   text-indent: 8px;
                   color: #cccc99;
                 }
 
+                /* 课程列表背景 */
                 .el-collapse-item__content {
                   background: #3b3b3b;
-                  color: #cccc99;
+                  /*color: #cccc99;*/
+                  ul {
+                    list-style: none;
+                    text-indent: 12px;
+
+                    li {
+                      color: white;
+                      font-size: 13px;
+                      line-height: 20px;
+                      height: 20px;
+                      font-family: "Microsoft YaHei UI", "Arial", "Hiragino Sans GB", 宋体, "Georgia", "serif";
+                      font-weight: 200;
+                      cursor: pointer;
+
+                      &:hover {
+                        opacity: .8;
+                      }
+                    }
+                  }
                 }
               }
-
-
             }
           }
-
-
         }
-
-
       }
     }
   }

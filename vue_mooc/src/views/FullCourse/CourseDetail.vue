@@ -2,7 +2,7 @@
   <div id="course-detail">
     <div class="container">
       <div class="course-common-detail">
-        <div @click="handleBtnGoClick" class="img-cover">
+        <div @click="handleBtnStartClick" class="img-cover">
           <img @mousedown.prevent="" :src="courses.currentCourse.cover_img" alt="">
         </div>
         <div class="desc">
@@ -20,7 +20,7 @@
               </div>
             </div>
           </div>
-          <div @click="handleBtnGoClick" class="btn-go">开始学习</div>
+          <div @click="handleBtnStartClick" class="btn-go">开始学习</div>
         </div>
       </div>
       <div class="course-content">
@@ -36,7 +36,7 @@
               </div>
               <el-steps :space="35" class="lesson" direction="vertical">
                 <el-step style="margin-left: 15px;" class="lesson-item" v-for="lesson in chapter.lesson"
-                         @click.native="handleToPlay(lesson.id)"
+                         @click.native="handleToPlay({courseID:courses.currentCourse.id,chapterID:chapter.id,lessonID:lesson.id})"
                          :title="lesson.title"></el-step>
               </el-steps>
             </div>
@@ -53,12 +53,15 @@
   export default {
     name: "CourseDetail",
     methods: {
-      handleToPlay(lessonID) {
-        alert(lessonID)
+      handleToPlay(params) {
+        this.$router.push({name: 'courseVideo', params})
       },
-      handleBtnGoClick() {
+      // 开始学习按钮点击
+      handleBtnStartClick() {
+        let courseID = this.courses.currentCourse.id
+        let chapterID = this.courses.currentCourse.chapter[0].id
         let lessonID = this.courses.currentCourse.chapter[0].lesson[0].id
-        this.handleToPlay(lessonID)
+        this.handleToPlay({courseID, chapterID, lessonID})
       }
     },
     watch: {
